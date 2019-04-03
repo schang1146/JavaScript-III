@@ -21,11 +21,36 @@ myCharacter("Orivald");
 // Principle 2
 
 // code example for Implicit Binding
+const myStats = {
+    attack: 99,
+    defence: 81,
+    showStats: function(name) {
+        console.log(`${name} atk: ${this.attack} | def: ${this.defence}`);
+    }
+};
+myStats.showStats("Harold");
 
 // Principle 3
 
 // code example for New Binding
+function createCharacter(character) {
+    this.user = character;
+    this.attack = 10;
+    this.defence = 10;
+    this.showStats = function() {
+        console.log(`${this.user}: atk+def = ${this.attack + this.defence}`);
+    }
+}
+
+const Isaac = new createCharacter('Isaac');
+const Garet = new createCharacter('Garet');
+
+Isaac.showStats();
+Garet.showStats();
 
 // Principle 4
 
 // code example for Explicit Binding
+Isaac.showStats.call(Garet);
+Garet.showStats.call(Isaac);
+Isaac.showStats(); // Does not mutate original!
